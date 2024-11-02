@@ -21,18 +21,21 @@ http.route({
           image: body.data.image_url,
           clerkId: body.data.id,
         });
+        break;
       case "user.updated":
         await ctx.runMutation(internal.functions.user.upsert, {
           username: body.data.username!,
           image: body.data.image_url,
           clerkId: body.data.id,
         });
+        break;
       case "user.deleted":
         if (body.data.id) {
           await ctx.runMutation(internal.functions.user.remove, {
             clerkId: body.data.id,
           });
         }
+        break;
     }
     return new Response("OK", { status: 200 });
   }),
