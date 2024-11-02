@@ -3,6 +3,7 @@ import { v } from "convex/values";
 
 export default defineSchema({
     messages: defineTable({
-        sender: v.string()
+        sender: v.string(),
+        content: v.string()
     })
 })
