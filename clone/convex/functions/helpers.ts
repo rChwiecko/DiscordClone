@@ -1,0 +1,1 @@
+export const authenticatedQuery = customQ
