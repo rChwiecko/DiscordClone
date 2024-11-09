@@ -59,18 +59,18 @@ function IconButton({
 }
 
 export function PendingFriendsList() {
-  const users = useTestUsers();
+  const friends = useQuery(api.functions.friends.listPending)
   return (
     <div className="flex flex-col divide-y">
       <h2 className="text-xs font-medium text-muted-foreground p-2.5">
         Pending Friends
       </h2>
-      {users.length === 0 && (
+      {friends?.length === 0 && (
         <FriendsListEmpty>No requests yet</FriendsListEmpty>
       )}
-      {users.length !== 0 &&
-        users.map((user, index) => (
-          <FriendItem key={index} username={user.username} image={user.image}>
+      {friends?.length !== 0 &&
+        friends?.map((friend, index) => (
+          <FriendItem key={index} username={friend.user.username} image={friend.user.image}>
             <IconButton
               title="Reject Friend"
               icon={<XIcon />}
@@ -88,16 +88,16 @@ export function PendingFriendsList() {
 }
 
 export function AcceptedFriendsList() {
-  const users = useTestUsers();
+  const friends = useQuery(api.functions.friends.listAccepted);
   return (
     <div className="flex flex-col divide-y">
       <h2 className="text-xs font-medium text-muted-foreground p-2.5">
         Accepted Friends
       </h2>
-      {users.length === 0 && <FriendsListEmpty>No friends</FriendsListEmpty>}
-      {users.length !== 0 &&
-        users.map((user, index) => (
-          <FriendItem key={index} username={user.username} image={user.image}>
+      {friends?.length === 0 && <FriendsListEmpty>No friends</FriendsListEmpty>}
+      {friends?.length !== 0 &&
+        friends?.map((friend, index) => (
+          <FriendItem key={index} username={friend.user.username} image={friend.user.image}>
             <IconButton title="Start DM" icon={<MessageCircleIcon />} />
             <IconButton
               title="Remove Friend"
